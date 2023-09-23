@@ -5,12 +5,12 @@ const Navbar = () => {
   const NavSection = <>
    <li><Link to='/'>Home</Link> </li>
    <li><Link to='/menu'>Menu</Link> </li>
-   <li><Link to='/'>Order</Link> </li>
+   <li><Link to='/order/salad'>Order</Link> </li>
    <li><Link to='/login'>Login</Link> </li>
   </>
   return (
-    <>
-      <div className="navbar fixed z-10 bg-opacity-30 bg-black text-white">
+    <div>
+      <div className="navbar fixed z-10 bg-opacity-30 max-w-screen-xl bg-black text-white">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -31,7 +31,7 @@ const Navbar = () => {
           <a className="btn">Button</a>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
