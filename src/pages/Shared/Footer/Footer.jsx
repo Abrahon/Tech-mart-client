@@ -1,7 +1,7 @@
 import React from 'react';
 const Footer = () => {
     return (
-        <div>
+        <div className='mt-10'>
             <footer className="footer p-10 bg-black text-neutral-content ">
                 <nav>
                     <header className="footer-title">Services</header>
