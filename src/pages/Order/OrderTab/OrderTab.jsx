@@ -10,7 +10,6 @@ const OrderTab = ({items}) => {
                  key={item._id}
                  item={item}
                  >
-
                  </FoodCards>)
 
             }

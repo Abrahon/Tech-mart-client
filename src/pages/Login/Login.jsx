@@ -4,12 +4,13 @@ import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, val
 import { AuthContext } from '../../Provider/AuthProvider';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2'
+import useAuth from '../../hooks/useAuth';
 
 const Login = () => {
   
     const [disabled, setDisabled] = useState(true)
 
-    const {signIn} = useContext(AuthContext);
+    const {signIn} = useAuth();
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -97,7 +98,7 @@ const Login = () => {
                         </div>
 
                         <div className="form-control mt-6">
-                            <input disabled={disabled} className="btn btn-primary" type="submit" value="login" />
+                            <input disabled={false} className="btn btn-primary" type="submit" value="login" />
                         </div>
                     </form>
                     <p className='px-2'>

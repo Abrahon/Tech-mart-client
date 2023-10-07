@@ -5,11 +5,13 @@ import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2'
+import SocialLogin from '../Shared/SocialLogin/SocialLogin';
+import useAuth from '../../hooks/useAuth';
 
 
 const SignUp = () => {
     const navigate = useNavigate();
-    const {updateUserProfile,createUser}=useContext(AuthContext)
+    const {updateUserProfile,createUser}=useAuth()
     const {
         register,
         reset,
@@ -24,18 +26,32 @@ const SignUp = () => {
                 const loggedUser = result.user;
                 console.log(loggedUser);
                 updateUserProfile(data.name, data.photoURL)
-
                 .then(()=>{
-                    console.log('user profile update');
-                    reset();
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'User created successfully',
-                        showConfirmButton: false,
-                        timer: 1500
-                      })
-                      navigate('/')
+                    const saveUser = {name: data.name, email: data.email, display: data.photoURL}
+                    fetch('http://localhost:5000/users',{
+                        method:'POST',
+                        headers:{
+                            'content-type' :'application/json'
+                        },
+                        body: JSON.stringify(saveUser)
+
+                    })
+
+                    .then(res=>res.json())
+                    .then(data=>{
+                        if(data.insertedId){
+                            reset();
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'User created successfully',
+                                showConfirmButton: false,
+                                timer: 1500
+                              })
+                              navigate('/')
+                        }
+                    })
+                   
                 })
                 .catch(error =>{
                     console.log(error)
@@ -98,6 +114,7 @@ const SignUp = () => {
                        <input className="btn btn-primary" type="submit" value="signup" />
                    </div>
                </form>
+               <SocialLogin></SocialLogin>
                <div className='px-2'>
                 <small className='text-red-800'>you have an account? <Link to="/login"> please login</Link></small>
                 </div>
